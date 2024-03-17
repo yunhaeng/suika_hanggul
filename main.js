@@ -4580,78 +4580,43 @@ const xe = [{
 }, {
     name: "10_jolee",
     radius: 259 / 2
-}]
-  , Pe = [{
-    name: "00_jeonghwan",
-    radius: 33 / 2
-}, {
-    name: "01_daeyeon",
-    radius: 48 / 2
-}, {
-    name: "02_seojun",
-    radius: 61 / 2
-}, {
-    name: "03_jiwoong",
-    radius: 69 / 2
-}, {
-    name: "04_wanseok",
-    radius: 89 / 2
-}, {
-    name: "05_daesik",
-    radius: 114 / 2
-}, {
-    name: "06_jinyeong",
-    radius: 129 / 2
-}, {
-    name: "07_sungeon",
-    radius: 156 / 2
-}, {
-    name: "08_yunhaeng",
-    radius: 177 / 2
-}, {
-    name: "09_gury",
-    radius: 220 / 2
-}, {
-    name: "10_jolee",
-    radius: 259 / 2
 }];
-let we = "halloween"
-  , Y = xe;
-switch (we) {
-case "halloween":
-    Y = Pe;
-    break;
-default:
-    Y = xe
-}
+
 const te = U.Engine.create()
   , Ce = U.Render.create({
     engine: te,
     element: document.body,
     options: {
         wireframes: !1,
-        background: "#F7F4C8",
-        width: 620,
+        background: "#EEFBFB",
+        width: 720,
         height: 850
     }
 })
   , ee = te.world
+  , background = Bodies.rectangle(310, 425, 620, 850, {
+    isStatic: !0,
+    isSensor: !0,
+    render: {
+        sprite: {texture: "/suika_hanggul/public/background.png"}
+    }
+})
   , Me = U.Bodies.rectangle(15, 395, 30, 790, {
     isStatic: !0,
     render: {
-        fillStyle: "#E6B143"
+        fillStyle: "#98A9FD"
     }
 })
   , Ae = U.Bodies.rectangle(605, 395, 30, 790, {
     isStatic: !0,
     render: {
-        fillStyle: "#E6B143"
+        fillStyle: "#98A9FD"
     }
 })
   , Ie = U.Bodies.rectangle(310, 820, 620, 60, {
     isStatic: !0,
     render: {
-        fillStyle: "#E6B143"
+        fillStyle: "#98A9FD"
     }
 })
   , Te = U.Bodies.rectangle(310, 150, 620, 2, {
@@ -4659,7 +4624,7 @@ const te = U.Engine.create()
     isStatic: !0,
     isSensor: !0,
     render: {
-        fillStyle: "#E6B143"
+        fillStyle: "#98A9FD"
     }
 });
 U.World.add(ee, [Me, Ae, Ie, Te]);
