@@ -1,6 +1,6 @@
 import {Bodies, Body, Collision, Engine, Events, Render, Runner, Composite} from "matter-js";
 import { CHARACTERS } from './character';
-
+import "./style.css";
 //dev list
 
 
