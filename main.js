@@ -4736,13 +4736,13 @@ window.onkeydown = K=>{
                 return;
             X = setInterval(()=>{
                 if ($.position.x + ae.radius < 590) {
-                    U.Body.setPosition(currentLine, {
-                    x: $.position.x + 1,
-                    y: $.position.y
+                    U.Body.setPosition($, {
+                        x: $.position.x + 1,
+                        y: $.position.y
                     });
                     U.Body.setPosition(currentLine, {
-                    x: currentLine.position.x + 1,
-                    y: currentLine.position.y
+                        x: currentLine.position.x + 1,
+                        y: currentLine.position.y
                     })
                 }
             }
