@@ -4548,71 +4548,71 @@ var re = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
 )(ge);
 var U = ge.exports;
 const xe = [{
-    name: "base/00_jeonghwan",
+    name: "00_jeonghwan",
     radius: 33 / 2
 }, {
-    name: "base/01_daeyeon",
+    name: "01_daeyeon",
     radius: 48 / 2
 }, {
-    name: "base/02_seojun",
+    name: "02_seojun",
     radius: 61 / 2
 }, {
-    name: "base/03_jiwoong",
+    name: "03_jiwoong",
     radius: 69 / 2
 }, {
-    name: "base/04_wanseok",
+    name: "04_wanseok",
     radius: 89 / 2
 }, {
-    name: "base/05_daesik",
+    name: "05_daesik",
     radius: 114 / 2
 }, {
-    name: "base/06_jinyeong",
+    name: "06_jinyeong",
     radius: 129 / 2
 }, {
-    name: "base/07_sungeon",
+    name: "07_sungeon",
     radius: 156 / 2
 }, {
-    name: "base/08_yunhaeng",
+    name: "08_yunhaeng",
     radius: 177 / 2
 }, {
-    name: "base/09_gury",
+    name: "09_gury",
     radius: 220 / 2
 }, {
-    name: "base/10_jolee",
+    name: "10_jolee",
     radius: 259 / 2
 }]
   , Pe = [{
-    name: "base/00_jeonghwan",
+    name: "00_jeonghwan",
     radius: 33 / 2
 }, {
-    name: "base/01_daeyeon",
+    name: "01_daeyeon",
     radius: 48 / 2
 }, {
-    name: "base/02_seojun",
+    name: "02_seojun",
     radius: 61 / 2
 }, {
-    name: "base/03_jiwoong",
+    name: "03_jiwoong",
     radius: 69 / 2
 }, {
-    name: "base/04_wanseok",
+    name: "04_wanseok",
     radius: 89 / 2
 }, {
-    name: "base/05_daesik",
+    name: "05_daesik",
     radius: 114 / 2
 }, {
-    name: "base/06_jinyeong",
+    name: "06_jinyeong",
     radius: 129 / 2
 }, {
-    name: "base/07_sungeon",
+    name: "07_sungeon",
     radius: 156 / 2
 }, {
-    name: "base/08_yunhaeng",
+    name: "08_yunhaeng",
     radius: 177 / 2
 }, {
-    name: "base/09_gury",
+    name: "09_gury",
     radius: 220 / 2
 }, {
-    name: "base/10_jolee",
+    name: "10_jolee",
     radius: 259 / 2
 }];
 let we = "halloween"
