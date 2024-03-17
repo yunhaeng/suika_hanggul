@@ -4581,7 +4581,7 @@ const xe = [{
     name: "10_jolee",
     radius: 259 / 2
 }];
-Y=xe;
+var Y=xe;
 const te = U.Engine.create()
   , Ce = U.Render.create({
     engine: te,
