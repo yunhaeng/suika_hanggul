@@ -4677,7 +4677,7 @@ function he() {
         isSleeping: !0,
         render: {
             sprite: {
-                texture: `/suika_hanggul/${W.name}.png`
+                texture: `/suika_hanggul/public/${W.name}.png`
             }
         },
         restitution: .2
@@ -4743,7 +4743,7 @@ U.Events.on(te, "collisionStart", K=>{
               , g = U.Bodies.circle(W.collision.supports[0].x, W.collision.supports[0].y, R.radius, {
                 render: {
                     sprite: {
-                        texture: `/suika_hanggul/${R.name}.png`
+                        texture: `/suika_hanggul/public/${R.name}.png`
                     }
                 },
                 index: B + 1
