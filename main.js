@@ -4581,7 +4581,7 @@ const xe = [{
     name: "10_jolee",
     radius: 259 / 2
 }];
-var Y=xe;
+var Y=xe
 const te = U.Engine.create()
   , Ce = U.Render.create({
     engine: te,
@@ -4626,14 +4626,23 @@ const te = U.Engine.create()
     render: {
         fillStyle: "#98A9FD"
     }
+})
+  , graph = U.Bodies.rectangle(670, 400, 100, 800, {
+    isSensor: !0,
+    isStatic: !0,
+    render: {sprite: {texture: "/suika_hanggul/public/graph.png"}}
 });
-U.World.add(ee, [Me, Ae, Ie, Te]);
+U.World.add(ee, [background, Me, Ae, Ie, Te, graph]);
 U.Render.run(Ce);
 U.Runner.run(te);
 let $ = null
   , ae = null
   , _ = !1
-  , X = null;
+  , X = null
+  , endpoint = 0
+  , score = 0
+  , currentLine = null
+  , currentScore = null;
 function he() {
     const K = Math.floor(Math.random() * 5)
       , W = Y[K]
@@ -4651,6 +4660,57 @@ function he() {
     ae = W,
     U.World.add(ee, B)
 }
+function addLine() {
+    const line = U.Bodies.rectangle(300, 455, 5, 600, {
+        isSensor: !0,
+        isSleeping: !0,
+        render: {
+            sprite: {texture: '/suika_hanggul/public/line.png'}
+        }
+    });
+    currentLine = line,
+    U.World.add(ee, line)
+}
+function scoreLogic(i) {
+    var temp_score = 0;
+    for (var step = 0; step <= i+1; step++) {
+        temp_score = temp_score + step
+    }
+    return temp_score;
+};
+function createImage($string) {
+    let drawing = document.createElement("canvas");
+
+    drawing.width = '150'
+    drawing.height = '50'
+
+    let ctx = drawing.getContext("2d");
+
+    ctx.fillStyle= "blue"
+    ctx.beginPath();
+    ctx.arc(75, 75, 20, 0, Math.PI * 2, true);
+    ctx.closePath();
+    ctx.fillStyle = '#98A9FD';
+    ctx.font = "20pt sans-serif";
+    ctx.textAlign = 'center'
+    ctx.fillText($string, 75, 25);
+
+    return drawing.toDataURL("image/png");
+};
+function addScore(i) {
+    const score_board = U.Bodies.rectangle(310, 200, 150, 50, {
+        isStatic: !0,
+        isSensor: !0,
+        render: {
+            sprite: {texture: createImage(i)},
+            xScale: 1,
+            yScale: 1
+        },
+    });
+
+    currentScore = score_board;
+    U.World.add(ee, score_board)
+}
 window.onkeydown = K=>{
     if (!_)
         switch (K.code) {
@@ -4658,10 +4718,16 @@ window.onkeydown = K=>{
             if (X)
                 return;
             X = setInterval(()=>{
-                $.position.x - ae.radius > 30 && U.Body.setPosition($, {
-                    x: $.position.x - 1,
-                    y: $.position.y
-                })
+                if ($.position.x - ae.radius > 30) {
+                    U.Body.setPosition($, {
+                        x: $.position.x - 1,
+                        y: $.position.y
+                    });
+                    U.Body.setPosition(currentLine, {
+                        x: currentLine.position.x - 1,
+                        y: currentLine.position.y
+                    });
+                }
             }
             , 5);
             break;
@@ -4669,18 +4735,26 @@ window.onkeydown = K=>{
             if (X)
                 return;
             X = setInterval(()=>{
-                $.position.x + ae.radius < 590 && U.Body.setPosition($, {
+                if ($.position.x + ae.radius < 590) {
+                    U.Body.setPosition(currentLine, {
                     x: $.position.x + 1,
                     y: $.position.y
-                })
+                    });
+                    U.Body.setPosition(currentLine, {
+                    x: currentLine.position.x + 1,
+                    y: currentLine.position.y
+                    })
+                }
             }
             , 5);
             break;
         case "KeyS":
+            U.World.remove(ee, currentLine)
             $.isSleeping = !1,
             _ = !0,
             setTimeout(()=>{
                 he(),
+                addLine(),
                 _ = !1
             }
             , 1e3);
@@ -4701,8 +4775,11 @@ U.Events.on(te, "collisionStart", K=>{
     K.pairs.forEach(W=>{
         if (W.bodyA.index === W.bodyB.index) {
             const B = W.bodyA.index;
+            if (B == Y.length - 2)
+                endpoint++;
             if (B === Y.length - 1)
                 return;
+            score = score + scoreLogic(B);
             U.World.remove(ee, [W.bodyA, W.bodyB]);
             const R = Y[B + 1]
               , g = U.Bodies.circle(W.collision.supports[0].x, W.collision.supports[0].y, R.radius, {
@@ -4714,10 +4791,24 @@ U.Events.on(te, "collisionStart", K=>{
                 index: B + 1
             });
             U.World.add(ee, g)
+            U.World.remove(ee, currentScore)
+            addScore(score)
         }
-        !_ && (W.bodyA.name === "topLine" || W.bodyB.name === "topLine") && alert("Game over")
+        !_ && (W.bodyA.name === "topLine" || W.bodyB.name === "topLine") && alert("Game over");
+        setTimeout(() => {
+            if (endpoint == 2) {
+                alert(`you win \n score: ${score}`);
+                endpoint=0;
+                U.World.remove(ee, currentScore);
+                score=0;
+                addScore(0);
+                U.World.clear(ee, true);
+            }
+        }, 1000)
     }
     )
 }
 );
+addLine();
 he();
+addScore(0);
