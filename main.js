@@ -4548,72 +4548,72 @@ var re = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : t
 )(ge);
 var U = ge.exports;
 const xe = [{
-    name: "base/00_cherry",
+    name: "base/00_jeonghwan",
     radius: 33 / 2
 }, {
-    name: "base/01_strawberry",
+    name: "base/01_daeyeon",
     radius: 48 / 2
 }, {
-    name: "base/02_grape",
+    name: "base/02_seojun",
     radius: 61 / 2
 }, {
-    name: "base/03_gyool",
+    name: "base/03_jiwoong",
     radius: 69 / 2
 }, {
-    name: "base/04_orange",
+    name: "base/04_wanseok",
     radius: 89 / 2
 }, {
-    name: "base/05_apple",
+    name: "base/05_daesik",
     radius: 114 / 2
 }, {
-    name: "base/06_pear",
+    name: "base/06_jinyeong",
     radius: 129 / 2
 }, {
-    name: "base/07_peach",
+    name: "base/07_sungeon",
     radius: 156 / 2
 }, {
-    name: "base/08_pineapple",
+    name: "base/08_yunhaeng",
     radius: 177 / 2
 }, {
-    name: "base/09_melon",
+    name: "base/09_gury",
     radius: 220 / 2
 }, {
-    name: "base/10_watermelon",
+    name: "base/10_jolee",
     radius: 259 / 2
 }]
   , Pe = [{
-    name: "halloween/00_cherry",
-    radius: 46 / 2
+    name: "base/00_jeonghwan",
+    radius: 33 / 2
 }, {
-    name: "halloween/01_strawberry",
-    radius: 55 / 2
+    name: "base/01_daeyeon",
+    radius: 48 / 2
 }, {
-    name: "halloween/02_grape",
-    radius: 67 / 2
+    name: "base/02_seojun",
+    radius: 61 / 2
 }, {
-    name: "halloween/03_gyool",
-    radius: 81 / 2
+    name: "base/03_jiwoong",
+    radius: 69 / 2
 }, {
-    name: "halloween/04_orange",
-    radius: 97 / 2
+    name: "base/04_wanseok",
+    radius: 89 / 2
 }, {
-    name: "halloween/05_apple",
-    radius: 117 / 2
+    name: "base/05_daesik",
+    radius: 114 / 2
 }, {
-    name: "halloween/06_pear",
-    radius: 142 / 2
+    name: "base/06_jinyeong",
+    radius: 129 / 2
 }, {
-    name: "halloween/07_peach",
-    radius: 171 / 2
+    name: "base/07_sungeon",
+    radius: 156 / 2
 }, {
-    name: "halloween/08_pineapple",
-    radius: 206 / 2
+    name: "base/08_yunhaeng",
+    radius: 177 / 2
 }, {
-    name: "halloween/09_melon",
-    radius: 249 / 2
+    name: "base/09_gury",
+    radius: 220 / 2
 }, {
-    name: "halloween/10_watermelon",
-    radius: 300 / 2
+    name: "base/10_jolee",
+    radius: 259 / 2
 }];
 let we = "halloween"
   , Y = xe;
