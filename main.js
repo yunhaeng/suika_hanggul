@@ -4594,7 +4594,7 @@ const te = U.Engine.create()
     }
 })
   , ee = te.world
-  , background = Bodies.rectangle(310, 425, 620, 850, {
+  , background = U.Bodies.rectangle(310, 425, 620, 850, {
     isStatic: !0,
     isSensor: !0,
     render: {
