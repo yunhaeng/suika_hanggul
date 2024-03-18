@@ -4794,7 +4794,13 @@ U.Events.on(te, "collisionStart", K=>{
             U.World.remove(ee, currentScore)
             addScore(score)
         }
-        !_ && (W.bodyA.name === "topLine" || W.bodyB.name === "topLine") && alert("Game over");
+        if (!_ && (W.bodyA.name === "topLine" || W.bodyB.name === "topLine")){
+            alert(`Game over\nscore: ${score}`);
+            U.World.remove(ee, currentScore);
+            score=0;
+            addScore(0);
+            U.World.clear(ee, true);
+        }
         setTimeout(() => {
             if (endpoint == 2) {
                 alert(`you win \n score: ${score}`);
