@@ -4644,7 +4644,7 @@ const te = U.Engine.create()
 
 
 
-U.World.add(ee, [background, Me, Ae, Ie, Te, graph]);
+U.World.add(ee, [background, Me, Ae, Ie, Te, graph, nextText]);
 U.Render.run(Ce);
 U.Runner.run(te);
 let $ = null
