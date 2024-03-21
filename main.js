@@ -4589,37 +4589,37 @@ const te = U.Engine.create()
     options: {
         wireframes: !1,
         background: "#EEFBFB",
-        width: 720,
+        width: 820,
         height: 850
     }
 })
   , ee = te.world
-  , background = U.Bodies.rectangle(310, 425, 620, 850, {
+  , background = U.Bodies.rectangle(400, 425, 620, 850, {
     isStatic: !0,
     isSensor: !0,
     render: {
         sprite: {texture: "/suika_hanggul/public/background.png"}
     }
 })
-  , Me = U.Bodies.rectangle(15, 395, 30, 790, {
+  , Me = U.Bodies.rectangle(115, 395, 30, 790, {
     isStatic: !0,
     render: {
         fillStyle: "#98A9FD"
     }
 })
-  , Ae = U.Bodies.rectangle(605, 395, 30, 790, {
+  , Ae = U.Bodies.rectangle(705, 395, 30, 790, {
     isStatic: !0,
     render: {
         fillStyle: "#98A9FD"
     }
 })
-  , Ie = U.Bodies.rectangle(310, 820, 620, 60, {
+  , Ie = U.Bodies.rectangle(410, 820, 620, 60, {
     isStatic: !0,
     render: {
         fillStyle: "#98A9FD"
     }
 })
-  , Te = U.Bodies.rectangle(310, 150, 620, 2, {
+  , Te = U.Bodies.rectangle(410, 150, 620, 2, {
     name: "topLine",
     isStatic: !0,
     isSensor: !0,
@@ -4627,11 +4627,23 @@ const te = U.Engine.create()
         fillStyle: "#98A9FD"
     }
 })
-  , graph = U.Bodies.rectangle(670, 400, 100, 800, {
+  , graph = U.Bodies.rectangle(50, 400, 100, 800, {
     isSensor: !0,
     isStatic: !0,
     render: {sprite: {texture: "/suika_hanggul/public/graph.png"}}
+})
+  , nextText = U.Bodies.rectangle(770, 30, 10, 10, {
+    isStatic: !0,
+    isSensor: !0,
+    render: {
+        sprite: {texture: CreateImage("next:")},
+        xScale: 1,
+        yScale: 1
+    }
 });
+
+
+
 U.World.add(ee, [background, Me, Ae, Ie, Te, graph]);
 U.Render.run(Ce);
 U.Runner.run(te);
@@ -4642,12 +4654,26 @@ let $ = null
   , endpoint = 0
   , score = 0
   , currentLine = null
-  , currentScore = null;
-function he() {
+  , currentScore = null
+  , nextIndex = null
+  , nextBody = null;
+function he(curindex) {
     const K = Math.floor(Math.random() * 5)
-      , W = Y[K]
-      , B = U.Bodies.circle(300, 50, W.radius, {
+      , W = Y[curindex]
+      , C = Y[K]
+      , N = U.Bodies.circle(770, 80, C.radius, {
         index: K,
+        isSensor: !0,
+        isSleeping: !0,
+        render: {
+            sprite: {
+                texture: `/suika_hanggul/public/${C.name}.png`
+            }
+        },
+        restitution: .2
+      })
+      , B = U.Bodies.circle(400, 50, W.radius, {
+        index: curindex,
         isSleeping: !0,
         render: {
             sprite: {
@@ -4656,12 +4682,18 @@ function he() {
         },
         restitution: .2
     });
+    if (nextBody){
+        U.World.remove(ee, nextBody)
+    }
+
     $ = B,
     ae = W,
-    U.World.add(ee, B)
+    nextIndex = K,
+    nextBody = N;
+    U.World.add(ee, [B, N])
 }
 function addLine() {
-    const line = U.Bodies.rectangle(300, 455, 5, 600, {
+    const line = U.Bodies.rectangle(400, 455, 5, 600, {
         isSensor: !0,
         isSleeping: !0,
         render: {
@@ -4698,7 +4730,7 @@ function createImage($string) {
     return drawing.toDataURL("image/png");
 };
 function addScore(i) {
-    const score_board = U.Bodies.rectangle(310, 200, 150, 50, {
+    const score_board = U.Bodies.rectangle(400, 200, 150, 50, {
         isStatic: !0,
         isSensor: !0,
         render: {
@@ -4718,7 +4750,7 @@ window.onkeydown = K=>{
             if (X)
                 return;
             X = setInterval(()=>{
-                if ($.position.x - ae.radius > 30) {
+                if ($.position.x - ae.radius > 130) {
                     U.Body.setPosition($, {
                         x: $.position.x - 1,
                         y: $.position.y
@@ -4735,7 +4767,7 @@ window.onkeydown = K=>{
             if (X)
                 return;
             X = setInterval(()=>{
-                if ($.position.x + ae.radius < 590) {
+                if ($.position.x + ae.radius < 690) {
                     U.Body.setPosition($, {
                         x: $.position.x + 1,
                         y: $.position.y
@@ -4816,5 +4848,5 @@ U.Events.on(te, "collisionStart", K=>{
 }
 );
 addLine();
-he();
+he(0);
 addScore(0);
