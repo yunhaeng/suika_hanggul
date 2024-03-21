@@ -4785,7 +4785,7 @@ window.onkeydown = K=>{
             $.isSleeping = !1,
             _ = !0,
             setTimeout(()=>{
-                he(),
+                he(nextIndex),
                 addLine(),
                 _ = !1
             }
