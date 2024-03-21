@@ -4636,7 +4636,7 @@ const te = U.Engine.create()
     isStatic: !0,
     isSensor: !0,
     render: {
-        sprite: {texture: CreateImage("next:")},
+        sprite: {texture: createImage("next:")},
         xScale: 1,
         yScale: 1
     }
@@ -4681,7 +4681,7 @@ function he(curindex) {
             }
         },
         restitution: .2
-    });
+      });
     if (nextBody){
         U.World.remove(ee, nextBody)
     }
