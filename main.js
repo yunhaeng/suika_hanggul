@@ -88,7 +88,7 @@ let nextindex = null;
 let nextBody = null;
 
 function addCharacter(curindex) {
-  const index = Math.floor(Math.random() * 5);
+  const index = 10//Math.floor(Math.random() * 5);
   const character = CHARACTERS[curindex];
   const nextcharacter = CHARACTERS[index];
   
@@ -286,8 +286,14 @@ Events.on(engine, "collisionStart", (event) => {
 
     if (
       !disableAction && 
-      (collision.bodyA.name === "topLine" || collision.bodyB.name === "topLine" ))
-      alert("Game over"); 
+      (collision.bodyA.name === "topLine" || collision.bodyB.name === "topLine" )){
+        alert(`Game over\nscore: ${score}`);
+        Composite.remove(ee, currentScore);
+        score=0;
+        addScore(0);
+        Composite.clear(ee, true);
+      }
+      
     setTimeout(() => {
       if (endpoint === 2) {
         alert(`you win \n score: ${score}`);
