@@ -1,6 +1,6 @@
 import {Bodies, Body, Collision, Engine, Events, Render, Runner, Composite} from "matter-js";
 import { CHARACTERS } from './character';
-import "./style.css";
+
 //dev list
 
 
@@ -11,7 +11,7 @@ const render = Render.create({
   options: {
     wireframes: false,
     background: "#EEFBFB",
-    width: 720,
+    width: 820,
     height: 850,
   }
 }
@@ -19,7 +19,7 @@ const render = Render.create({
 );
 const world = engine.world;
 
-const background = Bodies.rectangle(310, 425, 620, 850, {
+const background = Bodies.rectangle(400, 425, 620, 850, {
   isStatic: true,
   isSensor: true,
   render: { 
@@ -27,32 +27,42 @@ const background = Bodies.rectangle(310, 425, 620, 850, {
    }
 })
 
-const leftWall = Bodies.rectangle(15, 395, 30, 790, {
+const leftWall = Bodies.rectangle(115, 395, 30, 790, {
   isStatic: true,
   render: { fillStyle: "#98A9FD" }
 })
 
-const rightWall = Bodies.rectangle(605, 395, 30, 790, {
+const rightWall = Bodies.rectangle(705, 395, 30, 790, {
   isStatic: true,
   render: { fillStyle: "#98A9FD" }
 })
 
-const ground = Bodies.rectangle(310, 820, 620, 60, {
+const ground = Bodies.rectangle(410, 820, 620, 60, {
   isStatic: true,
   render: { fillStyle: "#98A9FD" }
 })
 
-const topLine = Bodies.rectangle(310, 150, 620, 2, {
+const topLine = Bodies.rectangle(410, 150, 620, 2, {
   name: "topLine",
   isSensor: true,
   isStatic: true,
   render: { fillStyle: "#98A9FD"}
 })
 
-const graph = Bodies.rectangle(670, 400, 100, 800, {
+const graph = Bodies.rectangle(50, 400, 100, 800, {
   isSensor: true,
   isStatic: true,
   render: {sprite: {texture: "graph.png"}}
+});
+
+const nextText = Bodies.rectangle(770, 30, 10, 10 ,{
+  isStatic: true,
+  isSensor: true,
+  render: {
+    sprite: { texture: createImage("next:")},
+    xScale: 1,
+    yScale: 1
+  },
 });
 
 // const graph = Bodies.rectangle(670, 400, 100, 800, {
@@ -61,11 +71,10 @@ const graph = Bodies.rectangle(670, 400, 100, 800, {
 //     render: { fillStyle: "#6c80b8"}
 //   });
 
-Composite.add(world, [background, leftWall, rightWall, ground, topLine, graph]);
+Composite.add(world, [background, leftWall, rightWall, ground, topLine, graph, nextText]);
 
 Render.run(render);
 Runner.run(engine);
-
 
 let currentBody = null;
 let currentCharacter = null;
@@ -75,14 +84,30 @@ let endpoint = 0;
 let score = 0;
 let currentLine = null;
 let currentScore = null;
+let nextindex = null;
+let nextBody = null;
 
+function addCharacter(curindex) {
+  const index = Math.floor(Math.random() * 5);
+  const character = CHARACTERS[curindex];
+  const nextcharacter = CHARACTERS[index];
+  
+  if (nextBody){
+    Composite.remove(world, nextBody)
+  }
 
-function addCharacter() {
-  const index = 9//Math.floor(Math.random() * 5);
-  const character = CHARACTERS[index];
-
-  const body = Bodies.circle(300, 50, character.radius, {
+  const nextbody = Bodies.circle(770, 80, nextcharacter.radius, {
     index: index,
+    isSensor: true,
+    isSleeping: true,
+    render: {
+      sprite: { texture: `${nextcharacter.name}.png` }
+    },
+    restitution: 0.2,
+  });
+
+  const body = Bodies.circle(400, 50, character.radius, {
+    index: curindex,
     isSleeping: true,
     render: {
       sprite: { texture: `${character.name}.png` }
@@ -92,13 +117,17 @@ function addCharacter() {
 
   currentBody = body;
   currentCharacter = character;
+  nextindex = index;
+  nextBody = nextbody
 
-  Composite.add(world, body);
+  Composite.add(world, [body, nextbody]);
 
 };
   
 function addLine() {
-  const line = Bodies.rectangle(300, 455, 5, 600, {
+  
+  
+  const line = Bodies.rectangle(400, 455, 5, 600, {
     isSensor: true,
     isSleeping: true,
     render: { 
@@ -144,7 +173,7 @@ function createImage($string) {
 };
 
 function addScore(i) {
-  const score_board = Bodies.rectangle(310, 200, 150, 50 ,{
+  const score_board = Bodies.rectangle(400, 200, 150, 50 ,{
     isStatic: true,
     isSensor: true,
     render: {
@@ -168,7 +197,7 @@ window.onkeydown = (event) => {
       if (interval)
         return;
       interval = setInterval(() => {
-        if (currentBody.position.x - currentCharacter.radius> 30){
+        if (currentBody.position.x - currentCharacter.radius> 130){
           Body.setPosition(currentBody, {
             x: currentBody.position.x - 1,
             y: currentBody.position.y,
@@ -184,7 +213,7 @@ window.onkeydown = (event) => {
       if (interval)
         return;
       interval = setInterval(() => {
-        if (currentBody.position.x + currentCharacter.radius < 590){
+        if (currentBody.position.x + currentCharacter.radius < 690){
           Body.setPosition(currentBody, {
             x: currentBody.position.x + 1,
             y: currentBody.position.y,
@@ -202,7 +231,7 @@ window.onkeydown = (event) => {
       disableAction = true;
 
       setTimeout(() => {
-        addCharacter();
+        addCharacter(nextindex);
         addLine();
         disableAction = false;
       }, 1000);
@@ -273,5 +302,5 @@ Events.on(engine, "collisionStart", (event) => {
 });
 
 addLine();
-addCharacter();
+addCharacter(0);
 addScore(0);
